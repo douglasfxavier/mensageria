@@ -25,5 +25,7 @@ public class Consumidor {
         };
 
         canal.basicConsume(NOME_FILA,true,callback,consumerTag->{});
+
+        System.out.println("Continuarei executando outras atividades enquanto não chega mensagem...");
     }
 }
