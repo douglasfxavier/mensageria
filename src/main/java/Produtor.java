@@ -6,12 +6,11 @@ import com.rabbitmq.client.ConnectionFactory;
 
 public class Produtor {
     public static void main(String[] args) throws Exception {
-        ConnectionFactory connectionFactory = new ConnectionFactory();
+        String NOME_FILA = "filaOla";
 
+        ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("localhost");
         connectionFactory.setPort(5672);
-
-        String NOME_FILA = "filaOla";
 
         try(
                 Connection connection = connectionFactory.newConnection();
