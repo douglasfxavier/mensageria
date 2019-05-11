@@ -9,8 +9,12 @@ public class Produtor {
         String NOME_FILA = "filaOla";
 
         ConnectionFactory connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost("localhost");
-        connectionFactory.setPort(5672);
+//        connectionFactory.setHost("localhost");
+//        connectionFactory.setPort(5672);
+//        connectionFactory.setHost("192.168.0.103");
+//        connectionFactory.setPort(5672);
+//        connectionFactory.setUsername("guest");
+//        connectionFactory.setPassword("guest");
 
         try(
                 Connection connection = connectionFactory.newConnection();
@@ -20,7 +24,8 @@ public class Produtor {
                 String mensagem = "Olá, mundo!";
 
                 channel.basicPublish("",NOME_FILA, null, mensagem.getBytes());
-                System.out.println("Enviei mensage: " + mensagem);
+                System.out.println(channel.getConnection().getAddress());
+                System.out.println("Enviei mensagem: " + mensagem);
         }
 
 
