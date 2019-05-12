@@ -16,8 +16,10 @@ public class Consumidor {
         connectionFactory.setHost("localhost");
         Connection connection = connectionFactory.newConnection();
 
+        boolean duravel = true;
+
         Channel canal = connection.createChannel();
-        canal.queueDeclare(NOME_FILA,false,false,false,null);
+        canal.queueDeclare(NOME_FILA,duravel,false,false,null);
 
         DeliverCallback callback = (consumerTag,delivery)->{
             String message = new String (delivery.getBody());
