@@ -1,7 +1,7 @@
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-
+import com.rabbitmq.client.MessageProperties;
 
 
 public class Produtor {
@@ -19,11 +19,11 @@ public class Produtor {
         try(
                 Connection connection = connectionFactory.newConnection();
                 Channel channel = connection.createChannel()){
+                boolean duravel = true;
 
-                channel.queueDeclare(NOME_FILA,false,false,false,null);
+                channel.queueDeclare(NOME_FILA,duravel,false,false,null);
                 String mensagem = "Olá, mundo!";
-
-                channel.basicPublish("",NOME_FILA, null, mensagem.getBytes());
+                channel.basicPublish("",NOME_FILA, MessageProperties.PERSISTENT_TEXT_PLAIN, mensagem.getBytes());
                 System.out.println(channel.getConnection().getAddress());
                 System.out.println("Enviei mensagem: " + mensagem);
         }
